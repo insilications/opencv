@@ -115,3 +115,4 @@
 -DBUILD_TESTS:BOOL=OFF
 -DBUILD_opencv_python_tests:BOOL=OFF
 -DBUILD_opencv_apps=ON
+-DOPENCV_CONFIG_INSTALL_PATH=/usr/lib64/cmake/opencv4

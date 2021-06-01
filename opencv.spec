@@ -759,7 +759,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1622530280
+export SOURCE_DATE_EPOCH=1622546877
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -789,13 +789,13 @@ export MAKEFLAGS=%{?_smp_mflags}
 #
 export CCACHE_DISABLE=true
 #
-export LD_LIBRARY_PATH="/usr/local/cuda/lib64:/usr/local/cuda/targets/x86_64-linux/lib:/usr/nvidia/lib64:/usr/nvidia/lib:/usr/nvidia/lib/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/lib64/dri:/usr/lib64/haswell:/usr/lib64:/usr/lib:/usr/share"
+export LD_LIBRARY_PATH="/usr/nvidia/lib64:/usr/nvidia/lib:/usr/nvidia/lib/vdpau:/usr/nvidia/lib64/xorg/modules/drivers:/usr/nvidia/lib64/xorg/modules/extensions:/usr/local/cuda/lib64:/usr/lib64/dri:/usr/lib64/haswell:/usr/lib64:/usr/lib:/usr/share"
 #
 export PATH="/usr/nvidia/bin:/usr/bin/haswell:/usr/bin:/usr/sbin"
 #
 #export NVCC_PREPEND_FLAGS="-O3 -Xptxas -O3,-v -cudart=static -ccbin=/usr/bin/gcc-10 -Xcompiler -O3,-static,-march=native,-mtune=native,-flto=16,-fuse-linker-plugin,-ffat-lto-objects,-fasynchronous-unwind-tables -Xlinker -flto=16,-fuse-linker-plugin,-ffat-lto-objects,-march=native,-mtune=native,-static -Xarchive -flto=16,-fuse-linker-plugin,-march=native,-mtune=native,-static"
 #-gencode;arch=compute_52,code=sm_52
-#-DOPENCV_CUDA_DETECTION_NVCC_FLAGS="-ccbin=/usr/bin/gcc-10"
+#-DWITH_CUDA=ON -DWITH_NVCUVID=ON -DWITH_NVCUVENC=OFF -DBUILD_opencv_cudacodec=ON -DWITH_CUDNN=OFF -DOPENCV_DNN_CUDA=OFF -DENABLE_FAST_MATH=1 -DCUDA_FAST_MATH=1 -DWITH_CUBLAS=1 -DWITH_V4L=ON -DOPENCV_GENERATE_PKGCONFIG=ON -DOPENCV_PC_FILE_NAME=opencv4.pc
 export VERBOSE=1
 export V=1
 ## altflags_pgo end
@@ -928,18 +928,17 @@ export LDFLAGS="${LDFLAGS_GENERATE}"
 ## make_macro content
 ninja --verbose
 ## make_macro end
-## ccache stats
-ccache -s
-## ccache stats
 
-ctest -j16 --verbose --progress --timeout 300 || :
-bin/opencv_perf_core || :
-bin/opencv_perf_imgproc || :
-bin/opencv_perf_dnn || :
-bin/opencv_perf_stitching || :
-bin/opencv_perf_features2d || :
-bin/opencv_perf_superres || :
+#ctest -j16 --verbose --progress --timeout 300 || :
 exit 1
+export OPENCV_TEST_DATA_PATH=/builddir/build/BUILD/opencv/opencv_extra/testdata
+python modules/ts/misc/run.py clr-build/ --perf_force_samples=1
+# bin/opencv_perf_core || :
+# bin/opencv_perf_imgproc || :
+# bin/opencv_perf_dnn || :
+# bin/opencv_perf_stitching || :
+# bin/opencv_perf_features2d || :
+# bin/opencv_perf_superres || :
 find . -type f,l -not -name '*.gcno' -not -name 'statuspgo*' -delete -print
 echo USED > statuspgo
 fi
@@ -1070,14 +1069,11 @@ export LDFLAGS="${LDFLAGS_USE}"
 ## make_macro content
 ninja --verbose
 ## make_macro end
-## ccache stats
-ccache -s
-## ccache stats
 fi
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1622530280
+export SOURCE_DATE_EPOCH=1622546877
 rm -rf %{buildroot}
 pushd clr-build
 %ninja_install

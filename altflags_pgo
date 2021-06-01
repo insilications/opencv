@@ -29,7 +29,6 @@ export PATH="/usr/nvidia/bin:/usr/bin/haswell:/usr/bin:/usr/sbin"
 #
 #export NVCC_PREPEND_FLAGS="-O3 -Xptxas -O3,-v -cudart=static -ccbin=/usr/bin/gcc-10 -Xcompiler -O3,-static,-march=native,-mtune=native,-flto=16,-fuse-linker-plugin,-ffat-lto-objects,-fasynchronous-unwind-tables -Xlinker -flto=16,-fuse-linker-plugin,-ffat-lto-objects,-march=native,-mtune=native,-static -Xarchive -flto=16,-fuse-linker-plugin,-march=native,-mtune=native,-static"
 #-gencode;arch=compute_52,code=sm_52
-#-DOPENCV_CUDA_DETECTION_NVCC_FLAGS="-ccbin=/usr/bin/gcc-10"
 #-DWITH_CUDA=ON -DWITH_NVCUVID=ON -DWITH_NVCUVENC=OFF -DBUILD_opencv_cudacodec=ON -DWITH_CUDNN=OFF -DOPENCV_DNN_CUDA=OFF -DENABLE_FAST_MATH=1 -DCUDA_FAST_MATH=1 -DWITH_CUBLAS=1 -DWITH_V4L=ON -DOPENCV_GENERATE_PKGCONFIG=ON -DOPENCV_PC_FILE_NAME=opencv4.pc
 export VERBOSE=1
 export V=1

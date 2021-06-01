@@ -1,0 +1,10 @@
+#ctest -j16 --verbose --progress --timeout 300 || :
+exit 1
+export OPENCV_TEST_DATA_PATH=/builddir/build/BUILD/opencv/opencv_extra/testdata
+python modules/ts/misc/run.py clr-build/ --perf_force_samples=1
+# bin/opencv_perf_core || :
+# bin/opencv_perf_imgproc || :
+# bin/opencv_perf_dnn || :
+# bin/opencv_perf_stitching || :
+# bin/opencv_perf_features2d || :
+# bin/opencv_perf_superres || :

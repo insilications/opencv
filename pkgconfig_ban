@@ -1,0 +1,10 @@
+# This file contains pkgconfig build requirements that get picked up
+# but are undesirable. One entry per line, no whitespace.
+libgphoto2
+libxine
+libdc1394-2
+libavutil
+libavformat
+libavcodec
+aravis-0.6
+libavresample

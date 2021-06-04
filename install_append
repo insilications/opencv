@@ -1,5 +1,6 @@
-# A bad idea but this will allow things that use pkgconfig to use opencv4
-# Probably remove at some point once software updates build detection for new upstream release
+sd "\-L\-L/usr/local/cuda \-llib64 \-L\-L" "" %{buildroot}/usr/lib64/pkgconfig/opencv4.pc || :
+sd "\-lIconv::Iconv" "" %{buildroot}/usr/lib64/pkgconfig/opencv4.pc || :
 cp %{buildroot}/usr/lib64/pkgconfig/opencv4.pc %{buildroot}/usr/lib64/pkgconfig/opencv.pc || :
+#
 install -dm 0755 %{buildroot}/usr/lib64/haswell/ || :
 cp --archive %{buildroot}/usr/lib64/lib*.so* %{buildroot}/usr/lib64/haswell/ || :

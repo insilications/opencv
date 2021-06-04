@@ -6,7 +6,7 @@
 -DCMAKE_AR=/usr/bin/gcc-ar
 -DCMAKE_NM=/usr/bin/gcc-nm
 -DCMAKE_RANLIB=/usr/bin/gcc-ranlib
--DCMAKE_INSTALL_LIBDIR:PATH=/usr/lib64
+-DCMAKE_INSTALL_LIBDIR:PATH=lib64
 -DCMAKE_INSTALL_PREFIX=/usr
 -DCMAKE_JOB_POOL_COMPILE=full_jobs
 -DCMAKE_JOB_POOL_LINK=full_jobs
